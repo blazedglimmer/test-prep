@@ -1,5 +1,9 @@
-import SearchInput from '@/components/search-input';
+// import SearchInput from '@/components/search-input';
+// import SearchIn from '@/components/search-in';
+// import DataTable from '@/components/data-table';
 // import Image from 'next/image';
+import DynamicForm from '@/components/dynamic-form';
+import DataTable from '@/components/extra-dt';
 
 export default function Home() {
   return (
@@ -62,10 +66,21 @@ export default function Home() {
     //     </div>
     //   </main>
     // </div>
-    <main className="min-h-screen flex items-center justify-center p-8">
+    <main className="min-h-screen flex items-center justify-center flex-col p-8 w-screen">
       <div className="w-full max-w-md p-6 rounded-lg shadow-md">
-        <SearchInput />
+        {/* <SearchInput /> */}
       </div>
+      <div className="w-full max-w-md p-6 rounded-lg shadow-md">
+        {/* <SearchIn /> */}
+      </div>
+      <br />
+      <div className="w-full max-w-md rounded-lg shadow-md">
+        {/* <DataTable /> */}
+      </div>
+      <div className="w-full max-w-4xl rounded-lg shadow-md">
+        <DataTable />
+      </div>
+      <DynamicForm />
     </main>
   );
 }

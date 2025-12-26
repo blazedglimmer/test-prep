@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+'use client';
+import { useState, useEffect, useCallback } from 'react';
 import {
   ChevronUp,
   ChevronDown,
@@ -121,7 +122,7 @@ const DataTable = () => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="flex items-center justify-center min-h-screen">
         <div className="bg-white p-8 rounded-lg shadow-md max-w-md">
           <div className="flex items-center gap-3 text-red-600 mb-4">
             <AlertCircle className="w-6 h-6" />
@@ -140,14 +141,12 @@ const DataTable = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
-          User Management
-        </h1>
+        <h1 className="text-3xl font-bold text-white mb-6">User Management</h1>
 
         {/* Filter Section */}
-        <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+        <div className=" rounded-lg shadow-md p-4 mb-6">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
@@ -161,7 +160,7 @@ const DataTable = () => {
         </div>
 
         {/* Table Section */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className=" rounded-lg shadow-md overflow-hidden">
           {loading ? (
             <div className="flex items-center justify-center py-20">
               <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
@@ -170,7 +169,7 @@ const DataTable = () => {
             <>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className=" border-b border-gray-200">
                     <tr>
                       {[
                         { field: 'id', label: 'ID' },
@@ -193,22 +192,22 @@ const DataTable = () => {
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className=" divide-y divide-gray-200">
                     {data.map(item => (
                       <tr
                         key={item.id}
-                        className="hover:bg-gray-50 transition-colors"
+                        className="hover:bg-gray-900 transition-colors"
                       >
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-100">
                           {item.id}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">
                           {item.name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                           {item.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                           {item.role}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -232,7 +231,7 @@ const DataTable = () => {
               </div>
 
               {/* Pagination */}
-              <div className="bg-gray-50 px-6 py-4 flex items-center justify-between border-t border-gray-200">
+              <div className=" px-6 py-4 flex items-center justify-between border-t border-gray-200">
                 <div className="text-sm text-gray-700">
                   Page <span className="font-medium">{page}</span> of{' '}
                   <span className="font-medium">{totalPages}</span>
@@ -241,14 +240,14 @@ const DataTable = () => {
                   <button
                     onClick={() => setPage(p => Math.max(1, p - 1))}
                     disabled={page === 1}
-                    className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:cursor-pointer"
                   >
                     Previous
                   </button>
                   <button
                     onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                     disabled={page === totalPages}
-                    className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:cursor-pointer"
                   >
                     Next
                   </button>

@@ -1,56 +1,40 @@
 'use client';
-import { useState } from 'react';
-const sampleData = [
-  {
-    id: 1,
-    name: 'Alice Johnson',
-    email: 'alice@example.com',
-    role: 'Developer',
-  },
-  { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'Designer' },
-  {
-    id: 3,
-    name: 'Carol Williams',
-    email: 'carol@example.com',
-    role: 'Manager',
-  },
-  {
-    id: 4,
-    name: 'David Brown',
-    email: 'david@example.com',
-    role: 'Developer',
-  },
-  { id: 5, name: 'Eve Davis', email: 'eve@example.com', role: 'Designer' },
-  {
-    id: 6,
-    name: 'Frank Miller',
-    email: 'frank@example.com',
-    role: 'Developer',
-  },
-  {
-    id: 7,
-    name: 'Grace Wilson',
-    email: 'grace@example.com',
-    role: 'Manager',
-  },
-  {
-    id: 8,
-    name: 'Henry Moore',
-    email: 'henry@example.com',
-    role: 'Designer',
-  },
-];
+import { useDebounce } from '@/hooks/useDebounce';
+import { useState, useEffect } from 'react';
 
 const SearchInput = () => {
   /* Implement search input functionality here using sampleData */
-  const [inputValue, setInputValue] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [sampleData, setSampleData] = useState<SampleDataItem[]>([]);
 
-  const filteredData = sampleData.filter(item =>
-    item.name.toLowerCase().includes(inputValue.toLowerCase())
-  );
+  const debouncedSearch = useDebounce(searchInput, 500);
+
+  useEffect(() => {
+    // This effect could be used to fetch data based on debounced search input
+    const fetchData = async () => {
+      const users = await fetch(
+        'https://jsonplaceholder.typicode.com/users?name_like=' +
+          debouncedSearch
+      );
+      const data = await users.json();
+      setSampleData(data);
+    };
+
+    const fetchAllUsersData = async () => {
+      const users = await fetch('https://jsonplaceholder.typicode.com/users');
+      const data = await users.json();
+      setSampleData(data);
+    };
+
+    if (debouncedSearch) {
+      fetchData();
+    } else {
+      fetchAllUsersData();
+    }
+  }, [debouncedSearch]);
 
   return (
-    <div>
+    <div className="relative p-4 rounded-lg shadow-md">
       <label className="block mb-2 font-medium" id="search-label">
         Search:
       </label>
@@ -58,17 +42,19 @@ const SearchInput = () => {
         type="text"
         placeholder="Search..."
         className="border p-2 rounded w-full mb-4"
-        value={inputValue}
-        onChange={e => setInputValue(e.target.value)}
+        value={searchInput}
+        onChange={e => setSearchInput(e.target.value)}
         aria-labelledby="search-label"
       />
       <label className="block mb-2 font-medium">Results:</label>
-      <ul>
-        {filteredData?.map(item => (
+      <ul className="max-h-60 overflow-y-auto border rounded p-2">
+        {sampleData?.map(item => (
           <li key={item.id} className="border-b py-2">
-            <p className="font-semibold">{item.name}</p>
+            <p className="font-semibold">
+              {item.id} {item.name}
+            </p>
             <p className="text-sm text-gray-600">{item.email}</p>
-            <p className="text-sm text-gray-500">{item.role}</p>
+            <p className="text-sm text-gray-500">{item.username}</p>
           </li>
         ))}
       </ul>
@@ -77,3 +63,27 @@ const SearchInput = () => {
 };
 
 export default SearchInput;
+
+type SampleDataItem = {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
+    };
+  };
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  };
+};

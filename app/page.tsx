@@ -2,8 +2,11 @@
 // import SearchIn from '@/components/search-in';
 // import DataTable from '@/components/data-table';
 // import Image from 'next/image';
-import DynamicForm from '@/components/dynamic-form';
-import DataTable from '@/components/extra-dt';
+// import DynamicForm from '@/components/dynamic-form';
+// import MainApp from '@/components/optimise-render';
+// import DataTable from '@/components/extra-dt';
+import { AssessmentQuestion as MethodOne } from '@/components/assessment-1';
+import { AssessmentQuestion } from '@/components/assessment-2';
 
 export default function Home() {
   return (
@@ -78,9 +81,12 @@ export default function Home() {
         {/* <DataTable /> */}
       </div>
       <div className="w-full max-w-4xl rounded-lg shadow-md">
-        <DataTable />
+        {/* <DataTable /> */}
       </div>
-      <DynamicForm />
+      {/* <DynamicForm /> */}
+      {/* <MainApp /> */}
+      <MethodOne />
+      <AssessmentQuestion />
     </main>
   );
 }

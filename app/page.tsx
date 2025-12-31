@@ -5,8 +5,9 @@
 // import DynamicForm from '@/components/dynamic-form';
 // import MainApp from '@/components/optimise-render';
 // import DataTable from '@/components/extra-dt';
-import { AssessmentQuestion as MethodOne } from '@/components/assessment-1';
-import { AssessmentQuestion } from '@/components/assessment-2';
+// import { AssessmentQuestion as MethodOne } from '@/components/assessment-1';
+// import { AssessmentQuestion } from '@/components/assessment-2';
+import { AssessmentQuestion } from '@/components/assessment-3';
 
 export default function Home() {
   return (
@@ -85,7 +86,8 @@ export default function Home() {
       </div>
       {/* <DynamicForm /> */}
       {/* <MainApp /> */}
-      <MethodOne />
+      {/* <MethodOne />
+      <AssessmentQuestion /> */}
       <AssessmentQuestion />
     </main>
   );

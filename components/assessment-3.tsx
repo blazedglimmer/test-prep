@@ -43,6 +43,20 @@ export const AssessmentQuestion = () => {
       <label htmlFor="paragraph"> Paragraph: </label>
 
       <div id="paragraph"> {highlightText(paragraph, searchTerm)}</div>
+
+      <br />
+      <div>
+        {' '}
+        {paragraph
+          .split(' ')
+          .map((part, index) =>
+            part.toLowerCase() === searchTerm.toLowerCase() ? (
+              <mark key={index}>{part}</mark>
+            ) : (
+              part
+            )
+          )}
+      </div>
     </>
   );
 };
